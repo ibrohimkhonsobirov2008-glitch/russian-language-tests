@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Тесты" />
+  <title>Тесты по русскому языку</title>
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --card:#ffffff;
+      --text:#1c2430;
+      --muted:#6b7280;
+      --accent:#3b82f6;
+      --ok:#16a34a;
+      --bad:#dc2626;
+      --line:#e5e7eb;
+      --shadow:0 10px 28px rgba(15,23,42,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    body{
+      padding: max(12px, env(safe-area-inset-top)) 12px max(24px, env(safe-area-inset-bottom));
+    }
+    #app{
+      max-width:700px;
+      margin:0 auto;
+    }
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:10;
+      background:rgba(245,247,251,.88);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 8px 0 12px;
+    }
+    .title{
+      font-size:22px;
+      font-weight:800;
+      margin:0 0 10px;
+    }
+    .mu{color:var(--muted);font-size:14px}
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      padding:16px;
+      margin:12px 0;
+    }
+    .topic{
+      width:100%;
+      border:1px solid var(--line);
+      background:var(--card);
+      color:var(--text);
+      border-radius:16px;
+      padding:14px 16px;
+      text-align:left;
+      font:inherit;
+      margin:10px 0;
+      box-shadow:var(--shadow);
+    }
+    .topic b{display:block;font-size:18px}
+    .topic .desc{display:block;font-size:13px;color:var(--muted);margin-top:4px}
+    .bar{
+      height:7px;
+      background:var(--line);
+      border-radius:999px;
+      overflow:hidden;
+      margin-top:10px;
+    }
+    .bar i{
+      display:block;
+      height:100%;
+      background:var(--accent);
+      border-radius:999px;
+    }
+    .row{
+      display:flex;justify-content:space-between;align-items:center;
+      font-size:14px;color:var(--muted);margin-bottom:8px;
+    }
+    .tm{font-weight:700}
+    .tm.low{color:var(--bad)}
+    .opt{
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      width:100%;
+      border:1.5px solid var(--line);
+      background:var(--card);
+      border-radius:14px;
+      padding:12px 12px;
+      font:inherit;
+      color:var(--text);
+      margin:8px 0;
+      text-align:left;
+      cursor:pointer;
+    }
+    .opt.sel{border-color:var(--accent);background:rgba(59,130,246,.08)}
+    .opt.ok{border-color:var(--ok);background:rgba(22,163,74,.08)}
+    .opt.no{border-color:var(--bad);background:rgba(220,38,38,.08)}
+    .box{
+      width:20px;height:20px;border:2px solid var(--muted);border-radius:50%;
+      flex:none; margin-top:2px;
+    }
+    .c .box{border-radius:6px}
+    .sel .box{background:var(--accent);border-color:var(--accent)}
+    .btn{
+      display:block;
+      width:100%;
+      border:none;
+      border-radius:14px;
+      background:var(--accent);
+      color:#fff;
+      padding:16px 18px;
+      font-size:16px;
+      font-weight:700;
+      margin:12px 0;
+      cursor:pointer;
+      box-shadow:0 10px 18px rgba(59,130,246,.25);
+    }
+    .btn.sec{
+      background:transparent;
+      color:var(--accent);
+      border:1.5px solid var(--accent);
+      box-shadow:none;
+    }
+    select{
+      width:100%;
+      background:var(--card);
+      color:var(--text);
+      border:1.5px solid var(--line);
+      border-radius:12px;
+      padding:12px;
+      font:inherit;
+      margin-top:6px;
+    }
+    .big{
+      font-size:44px;
+      font-weight:900;
+      text-align:center;
+      margin:8px 0;
+    }
+    .tag{
+      display:inline-block;
+      font-size:12px;
+      padding:4px 10px;
+      border-radius:999px;
+      margin-left:8px;
+      color:#fff;
+      font-weight:700;
+    }
+    .tag.ok{background:var(--ok)}
+    .tag.no{background:var(--bad)}
+    footer{
+      text-align:center;
+      font-size:12px;
+      color:var(--muted);
+      margin-top:18px;
+      padding-bottom:10px;
+    }
+    @media (max-width: 480px){
+      .title{font-size:20px}
+      .card{padding:14px}
+      .topic{padding:12px 14px}
+      .big{font-size:40px}
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <footer>Created by Sobirov Ibrohimkhon</footer>
+
+  <script>
+    const DATA = [
+      {"n":"ТЕМА 1. ЯЗЫК И ОБЩЕСТВО","q":[{"k":"s","q":"В каком слове пропущена буква «Е»?","a":[["Б…рёза",1],["Д…ректор",0],["Г…ризонт",0],["Ур…вень",0]]},{"k":"s","q":"В каком слове есть непроизносимая согласная?","a":[["Лестница",1],["Город",0],["Книга",0],["Небо",0]]},{"k":"s","q":"В каком слове пропущена буква «О»?","a":[["М…локо",1],["П...ртнёр",0],["Гл…вный",0],["П…рад",0]]},{"k":"s","q":"В каком слове пропущена буква «У»","a":[["Ш…м",1],["Д...ча",0],["Фл…г",0],["Тр…ва",0]]},{"k":"s","q":"В каком слове пропущена буква «И»","a":[["С…стема",1],["П…редмет",0],["Б…гаж",0],["С…хар",0]]},{"k":"x","q":"Какую роль язык играет в обществе?","a":[["Средство общения",1],["Средство обучения",1],["Источник шума",0],["Средство передвижения",0]]},{"k":"s","q":"Поставьте вместо точек букву «А»","a":[["Ч...совой",1],["…бувь",0],["Дерев…",0],["Кр…вать",0]]},{"k":"x","q":"Как связаны язык и культура?","a":[["Язык отражает культурные особенности народа",1],["Язык передаёт национальные традиции и ценности",1],["Развиваются независимо друг от друга",0],["Культура формируется исключительно без языка",0]]},{"k":"x","q":"Что такое билингвизм?","a":[["Владение двумя языками",1],["Использование двух языков при общении",1],["Использование одного языка в разных стилях",0],["Понимание языка без умения говорить на нём",0]]},{"k":"x","q":"Что такое языковая семья?","a":[["Группа языков, происходящих от одного общего предка",1],["Языки, имеющие общие корни",1],["Языки соседних стран",0],["Совокупность диалектов одного языка",0]]},{"k":"x","q":"Какие языки относятся к индоевропейской  семье?","a":[["Английский",1],["Немецкий",1],["Арабский",0],["Китайский",0]]},{"k":"x","q":"Какие языки входят в иранскую группу?","a":[["Таджикский",1],["Персидский",1],["Узбекский",0],["Албанский",0]]},{"k":"x","q":"Какие языки относятся к славянской группе?","a":[["Русский",1],["Болгарский",1],["Хинди",0],["Итальянский",0]]},{"k":"m","q":"Найдите соответствия","p":[["Русский","Славянская"],["Таджикский","Иранская"],["Английский","Германская"],["Французский","Романская"]]},{"k":"m","q":"Укажите соответствия","p":[["Количество языков","от 2800 до 3000"],["Язык","средство общения"],["Самая большая семья языков","Индоевропейская"],["Искусственный язык","эсперанто"],["","средство обогащения"]]},{"k":"m","q":"Определите соответствия","p":[["Мёртвый язык","Санскрит"],["Искусственный язык","Эсперанто"],["Германская группа","английский язык"],["Романская группа","французский язык"]]},{"k":"m","q":"Выберите правильные соответствия","p":[["Нерасшифрованные","письмена"],["Пять","пенте, пинкве"],["Официальный","язык"],["ООН","Организация Объединенных Наций"],["","азбука"]]}]},
+      {"n":"ТЕМА 2. МОЙ ДЕНЬ. РАСПОРЯДОК ДНЯ.","q":[{"k":"s","q":"Укажите слово, где допущена ошибка в написании гласной после шипящих:","a":[["Щопот",1],["Жёлудь",0],["Щёлочь",0],["Чёлка",0]]},{"k":"s","q":"Выберите слово, в котором нарушено правило написания И и Ы после Ц:","a":[["Цыкл",1],["Циферблат",0],["Цыган",0],["Цирк",0]]},{"k":"s","q":"Укажите вариант с «О» после шипящих","a":[["Изж...га, лодч...нка, свеж..., смеш…н,",1],["Ш...пот, круч...ный, щ...лочь,",0],["Береж...т, туш…нка, ж…лудь, печ...ный,",0],["Стаж...р,  реш…тка, освещ…нный, ещ...,",0]]},{"k":"s","q":"Укажите ряд, где слова написаны правильно","a":[["Циркуль, цитата",1],["Цыпочка, цынк",0],["Цыкл, цыпка",0],["Цытрус, цилиндр",0]]},{"k":"s","q":"Вставьте букву Ё после шипящих","a":[["Искаж…нное изображение",1],["Пуш…к",0],["Ш…ковая терапия",0],["Пирог с алич…й",0]]},{"k":"s","q":"Вставьте букву Ш","a":[["Кроме…ная тьма",1],["Кирги…ка",0],["Ро...кое поведение",0],["Сильная бомбе…ка",0]]},{"k":"s","q":"Укажите правильное слово","a":[["Агитация",1],["Жури",0],["Деформация",0],["Акация",0]]},{"k":"x","q":"Назовите действия, которые входят в утренний распорядок?","a":[["Просыпаться, умываться",1],["Завтракать, одеваться",1],["Засыпать, работать",0],["Смотреть телевизор, играть",0]]},{"k":"x","q":"Что относится к высшим учебным заведениям?","a":[["Университет",1],["Институт",1],["Техникум",0],["Колледж",0]]},{"k":"x","q":"Какие формы обучения существуют в вузах?","a":[["Очная",1],["Заочная",1],["Вечерняя",0],["Периодическая",0]]},{"k":"x","q":"Какие обязанности есть у студента?","a":[["Желание учиться",1],["Соблюдать правила вуза",1],["Прогуливать занятия",0],["Не выполнять задания",0]]},{"k":"x","q":"Какие типы вузов существуют?","a":[["Государственные",1],["Частные",1],["Смешанные",0],["Виртуальные",0]]},{"k":"x","q":"Какие уровни есть в высшем образовании?","a":[["Бакалавриат",1],["Магистратура",1],["Начальная школа",0],["Средняя школа",0]]},{"k":"x","q":"Какие качества помогают молодёжи строить будущее?","a":[["Ответственность",1],["Образованность",1],["Безразличие",0],["Лень",0]]},{"k":"m","q":"Найдите соответствия","p":[["Н��ша семья","дружная"],["Дальний","родственник"],["Родительский","дом"],["Сердечные","отношения"]]},{"k":"m","q":"Определите соответствия между словами","p":[["Трудолюбивый","любит работать"],["Одарённый","Талантливый"],["Правдивый","всегда говорит правду"],["Пунктуальный","всё делает вовремя"]]},{"k":"m","q":"Укажите определения","p":[["Вуз","высшее учебное заведение"],["Семестр","время занятия в вузе (полгода)"],["Студенческая","конференция"],["Кредитная","Система"]]},{"k":"m","q":"Выберите правильное определение","p":[["Политехнический","институт"],["Высшее","образование"],["Трудовая","жизнь"],["Система","образования"]]}]}
+    ];
+    const $ = document.getElementById('app');
+    const sh = a => { a=[...a]; for(let i=a.length-1;i>0;i--){ const j=Math.random()*(i+1)|0; [a[i],a[j]]=[a[j],a[i]]; } return a; };
+    const esc = s => String(s).replace(/[&<>"]/g,c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    const GR = [[1,10],[.81,9],[.64,8],[.49,7],[.36,6],[.25,5],[.16,4],[.09,3],[.04,2],[.01,1]];
+    const grade = p => { for(const[t,g]of GR) if(p >= t - 1e-9) return g; return 0; };
+    const LIMIT = 600;
+    let T,Q,i,ans,left,tick;
+    function best(){ try{return JSON.parse(localStorage.getItem('best')||'{}')}catch(e){return{}} }
+    function saveBest(k,v){ try{const b=best(); if(!(b[k]>=v)){ b[k]=v; localStorage.setItem('best', JSON.stringify(b)); } }catch(e){} }
+    function home(){
+      clearInterval(tick);
+      const b=best();
+      $.innerHTML = '<div class="topbar"><h1 class="title">Тесты по русскому языку</h1><div class="mu">Выберите тему. На тест даётся 10 минут.</div></div>' +
+      DATA.map((t,k)=>`<button class="topic" data-k="${k}"><b>${esc(t.n)}</b><span class="desc">${t.q.length} вопросов${b[k]!=null ? ' · лучший результат: '+b[k]+'%' : ''}</span></button>`).join('');
+      $.querySelectorAll('.topic').forEach(e=> e.onclick = () => start(+e.dataset.k));
+      window.scrollTo(0,0);
+    }
+    function start(k){
+      T=k;
+      Q = sh(DATA[k].q).map(q => {
+        if(q.k === 'm'){ const L = q.p.filter(p => p[0]); return {...q, L, R: sh(q.p.map(p => p[1]))}; }
+        return {...q, a: sh(q.a)};
+      });
+      ans = Q.map(q => q.k === 'm' ? q.L.map(() => -1) : []);
+      i = 0; left = LIMIT;
+      clearInterval(tick);
+      tick = setInterval(() => {
+        left--;
+        const e = document.getElementById('tm');
+        if(e){ e.textContent = fmt(left); e.classList.toggle('low', left < 60); }
+        if(left <= 0) finish();
+      }, 1000);
+      show();
+    }
+    function fmt(s){ return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
+
+    function show(){
+      const q = Q[i];
+      const a = ans[i];
+      let h = `<div class="topbar"><div class="row"><span>Вопрос ${i+1} из ${Q.length}</span><span id="tm" class="tm">${fmt(left)}</span></div><div class="bar"><i style="width:${(i/Q.length)*100}%"></i></div></div><div class="card"><h2 style="margin:0 0 12px">${esc(q.q)}</h2>`;
+      if(q.k === 'm'){
+        h += '<div class="mu">Выберите для каждого пункта пару</div>';
+        q.L.forEach((p,n) => {
+          h += `<div style="margin-top:10px"><b>${esc(p[0])}</b><select data-n="${n}"><option value="-1">— выберите —</option>${q.R.map((r,x) => `<option value="${x}"${a[n]===x ? ' selected' : ''}>${esc(r)}</option>`).join('')}</select></div>`;
+        });
+      } else {
+        h += `<div class="mu">${q.k === 'x' ? 'Выберите все верные варианты' : 'Выберите один вариант'}</div>`;
+        h += q.a.map((o,n) => `<button class="opt ${q.k === 'x' ? 'c' : 'r'}${a.includes(n) ? ' sel' : ''}" data-n="${n}"><span class="box"></span><span>${esc(o[0])}</span></button>`).join('');
+      }
+      h += `</div><button class="btn" id="nx">${i < Q.length-1 ? 'Далее' : 'За��ершить'}</button>${i > 0 ? '<button class="btn sec" id="pv">Назад</button>' : ''}`;
+      $.innerHTML = h;
+      window.scrollTo(0,0);
+
+      $.querySelectorAll('.opt').forEach(e => {
+        e.onclick = () => {
+          const n = +e.dataset.n;
+          if(q.k === 'x'){
+            const x = a.indexOf(n);
+            x < 0 ? a.push(n) : a.splice(x,1);
+          } else {
+            ans[i] = [n];
+          }
+          show();
+        };
+      });
+
+      $.querySelectorAll('select').forEach(e => e.onchange = () => { a[+e.dataset.n] = +e.value; });
+
+      document.getElementById('nx').onclick = () => {
+        if(i < Q.length - 1) { i++; show(); }
+        else confirmEnd();
+      };
+
+      const pv = document.getElementById('pv');
+      if(pv) pv.onclick = () => { i--; show(); };
+    }
+
+    function confirmEnd(){
+      const un = Q.filter((q,n) => q.k === 'm' ? ans[n].includes(-1) : !ans[n].length).length;
+      if(un && !confirm('Без ответа: ' + un + '. Завершить тест?')) return;
+      finish();
+    }
+
+    function right(q,a){
+      if(q.k === 'm') return q.L.every((p,n) => a[n] >= 0 && q.R[a[n]] === p[1]);
+      const c = q.a.map((o,n) => o[1] ? n : -1).filter(n => n >= 0);
+      return c.length === a.length && c.every(n => a.includes(n));
+    }
+
+    function finish(){
+      clearInterval(tick);
+      const ok = Q.map((q,n) => right(q, ans[n]));
+      const s = ok.filter(Boolean).length;
+      const p = s / Q.length;
+      saveBest(T, Math.round(p * 100));
+      let h = `<div class="topbar"><h1 class="title">${esc(DATA[T].n)}</h1></div><div class="card"><div class="big">${s} / ${Q.length}</div><div class="mu" style="text-align:center">Верно: ${Math.round(p*100)}% · Оценка по 10-балльной шкале: <b>${grade(p)}</b></div></div>`;
+      h += `<button class="btn" id="re">Пройти заново</button><button class="btn sec" id="hm">К списку тем</button><h2 style="margin-top:20px">Разбор ответов</h2>`;
+      Q.forEach((q,n) => {
+        h += `<div class="card"><b>${n+1}. ${esc(q.q)}</b><span class="tag ${ok[n] ? 'ok' : 'no'}">${ok[n] ? 'верно' : 'неверно'}</span>`;
+        if(q.k === 'm'){
+          q.L.forEach((p,x) => {
+            const g = ans[n][x] >= 0 ? q.R[ans[n][x]] : '—';
+            h += `<div style="margin-top:8px">${esc(p[0])} → <span style="color:${g === p[1] ? 'var(--ok)' : 'var(--bad)'}">${esc(g)}</span>${g === p[1] ? '' : ' <span class="mu">(верно: ' + esc(p[1]) + ')</span>'}</div>`;
+          });
+        } else {
+          q.a.forEach((o,x) => {
+            const u = ans[n].includes(x);
+            h += `<div class="opt ${o[1] ? 'ok' : (u ? 'no' : '')}" style="cursor:default"><span>${o[1] ? '✓' : (u ? '✗' : '•')}</span><span>${esc(o[0])}${u ? ' <span class=\"mu\">(ваш ответ)</span>' : ''}</span></div>`;
+          });
+        }
+        h += '</div>';
+      });
+      $.innerHTML = h;
+      window.scrollTo(0,0);
+      document.getElementById('re').onclick = () => start(T);
+      document.getElementById('hm').onclick = home;
+    }
+
+    home();
+  </script>
+</body>
+</html>
